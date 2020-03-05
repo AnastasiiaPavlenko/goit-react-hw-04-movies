@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import moviesAPI from '../services/api';
+import ReviewsList from '../components/ReviewsList';
 
 class Reviews extends Component {
     state = {
-        reviews: null,
+        reviews: [],
     }
 
     componentDidMount() {
@@ -16,14 +17,11 @@ class Reviews extends Component {
             {reviews && (
                 <ul>
                     {reviews.map(review => (
-                        <li key={review.id}>
-                            <h4>{review.author}</h4>
-                            <p>{review.content}</p>
-                        </li>
+                        <ReviewsList key={review.id} review={review} />
                     ))}
                 </ul>
             )}
-            {!reviews && (
+            {this.state.reviews.length === 0 && (
                 <p>No reviews</p>
             )}
         </>

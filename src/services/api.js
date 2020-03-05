@@ -7,14 +7,14 @@ const fetchMovieWithQuery = query => {
   return axios
     .get(
       `${baseURL}/search/movie?api_key=${apiKey}&language=en-US&query=${query}&page=1&include_adult=false`,
-    )
+  )
     .then(response => response.data.results);
 };
 
 const fetchPopularTVShows = () => {
   return axios
     .get(`${baseURL}/trending/all/day?api_key=${apiKey}`)
-    .then(response => response.data.results);
+    .then(response => response.data.results.filter(movie => movie.media_type === "movie"));
 };
 
 const fetchMovieDetails = movieId => {

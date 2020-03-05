@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import moviesAPI from '../services/api';
-import { Link } from 'react-router-dom';
-
+import HomePageList from '../components/HomePageList';
 class HomePage extends Component {
     state = {
         movies: [],
     };
 
     componentDidMount() {
-        moviesAPI.fetchPopularTVShows().then(movies => this.setState({ movies: movies }));
+        moviesAPI.fetchPopularTVShows().then(movies =>
+            this.setState({ movies: movies }));
     };
 
     render() {
         const { movies } = this.state;
+
         return (
             <>
                 <div>
@@ -20,11 +21,7 @@ class HomePage extends Component {
                     {movies.length > 0 && (
                         <ul>
                             {movies.map(movie => (
-                                <li key={movie.id}>
-                                    <Link to={`movies/${movie.id}`}>
-                                        {movie.original_title}
-                                    </Link>
-                                </li>
+                                <HomePageList key={movie.id} movie={movie} />
                             ))}
                         </ul>
                     )}

@@ -38,7 +38,6 @@ class MovieDetailsPage extends Component {
     render() {
         const { movie, isLoading, error } = this.state;
         const { match } = this.props;
-        const api_key = '0eb62c2d6ca9e441fe73e4d10fffe660';
 
         return (
             <div>
@@ -50,7 +49,7 @@ class MovieDetailsPage extends Component {
                             </button>
                         </div>
                         <div>
-                            <img src={`https://image.tmdb.org/t/p/w300/${movie.backdrop_path}?api_key=${api_key}`} alt="movie poster" />
+                            <img src={`https://image.tmdb.org/t/p/w300/${movie.backdrop_path}`} alt="movie poster" />
                             <h2>{movie.original_title}</h2>
                         </div>
                         <p>User vote: {movie.vote_average}</p>
