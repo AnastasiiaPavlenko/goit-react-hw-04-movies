@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import PropTypes from 'prop-types';
-import Appbar from './Appbar';
 import styles from './Styles.module.css';
+import Loader from './Loader';
+
+const Appbar = React.lazy(() => import('./Appbar'));
 
 const Layout = ({ children }) => (
   <div className={styles.Layout}>
-    <Appbar />
+    <Suspense fallback={<Loader />}>
+      <Appbar />
+    </Suspense>
     <hr />
     {children}
   </div>

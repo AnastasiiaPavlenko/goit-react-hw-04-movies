@@ -1,9 +1,13 @@
-import React from 'react';
-import Navigation from './Navigation';
+import React, { Suspense } from 'react';
+import Loader from './Loader';
+
+const Navigation = React.lazy(() => import('./Navigation'));
 
 const Appbar = () => (
   <header>
-    <Navigation />
+    <Suspense fallback={<Loader />}>
+      <Navigation />
+    </Suspense>
   </header>
 );
 

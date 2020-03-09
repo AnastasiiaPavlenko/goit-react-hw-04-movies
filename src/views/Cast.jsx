@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense } from 'react';
 import moviesAPI from '../services/api';
-import CastList from '../components/CastList';
+import Loader from '../components/Loader';
+
+const CastList = React.lazy(() => import('../components/CastList'));
 
 class Cast extends Component {
     state = {
@@ -13,12 +15,18 @@ class Cast extends Component {
 
     render() {
         const { cast } = this.state;
+        const imgSrc = (profile_path) => {
+            return profile_path != null ? `https://image.tmdb.org/t/p/w92${profile_path}` : 'https://www.novelupdates.com/img/noimagefound.jpg';
+        };
+
         return (<>
             {cast && (
                 <ul>
-                    {cast.map(cast => (
-                        <CastList key={cast.id} cast={cast} />
-                    ))}
+                    <Suspense fallback={<Loader />}>
+                        {cast.map(cast => (
+                            <CastList key={cast.id} cast={cast} src={imgSrc(cast.profile_path)} />
+                        ))}
+                    </Suspense>
                 </ul>
             )}
         </>
