@@ -1,8 +1,7 @@
-import React, { Component, Suspense } from 'react';
+import React, { Component } from 'react';
 import moviesAPI from '../services/api';
-import Loader from '../components/Loader';
+import HomePageList from '../components/HomePageList';
 
-const HomePageList = React.lazy(() => import('../components/HomePageList'));
 class HomePage extends Component {
     state = {
         movies: [],
@@ -22,11 +21,9 @@ class HomePage extends Component {
                     <h1>Trending Today</h1>
                     {movies.length > 0 && (
                         <ul>
-                            <Suspense fallback={<Loader />}>
-                                {movies.map(movie => (
-                                    <HomePageList key={movie.id} movie={movie} />
-                                ))}
-                            </Suspense>
+                            {movies.map(movie => (
+                                <HomePageList key={movie.id} movie={movie} />
+                            ))}
                         </ul>
                     )}
                 </div>

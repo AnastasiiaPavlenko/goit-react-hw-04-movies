@@ -1,10 +1,8 @@
-import React, { Component, Suspense } from 'react';
+import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import getQueryParams from '../utils/getQueryParams';
 import moviesAPI from '../services/api';
-import Loader from '../components/Loader';
-
-const Searchbar = React.lazy(() => import('../components/Searchbar'));
+import Searchbar from '../components/Searchbar';
 
 class MoviesPage extends Component {
     state = {
@@ -46,9 +44,7 @@ class MoviesPage extends Component {
         return (
             <>
                 <div>
-                    <Suspense fallback={<Loader />}>
-                        <Searchbar onSubmit={this.handleChangeQuery} />
-                    </Suspense>
+                    <Searchbar onSubmit={this.handleChangeQuery} />
                     {movies.length > 0 && (
                         <ul>
                             {movies.map(movie => (

@@ -1,12 +1,11 @@
-import React, { Component, Suspense } from 'react';
+import React, { Component } from 'react';
 import { NavLink, Route } from 'react-router-dom';
 import moviesAPI from '../services/api';
 import Loader from '../components/Loader';
 import routes from '../routes';
 import styles from '../components/Styles.module.css'
-
-const Cast = React.lazy(() => import('../views/Cast'));
-const Reviews = React.lazy(() => import('../views/Reviews'));
+import Cast from '../views/Cast';
+import Reviews from '../views/Reviews';
 
 class MovieDetailsPage extends Component {
     state = {
@@ -76,10 +75,8 @@ class MovieDetailsPage extends Component {
                 <hr />
                 {error && <p>Woops, something went wrong: {error.message} </p>}
                 {isLoading && <Loader />}
-                <Suspense fallback={<Loader />}>
-                    <Route path={routes.cast} component={Cast} />
-                    <Route path={routes.reviews} component={Reviews} />
-                </Suspense>
+                <Route path={routes.cast} component={Cast} />
+                <Route path={routes.reviews} component={Reviews} />
             </div>
         );
     }

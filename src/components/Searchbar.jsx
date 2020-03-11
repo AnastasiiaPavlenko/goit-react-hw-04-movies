@@ -28,7 +28,6 @@ class Searchbar extends Component {
             <form onSubmit={this.handleSubmit}>
                 <input
                     type="text"
-                    autoFocus
                     autoComplete="off"
                     placeholder="Search movies"
                     onChange={this.handleChange}

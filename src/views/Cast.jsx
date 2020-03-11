@@ -1,8 +1,6 @@
-import React, { Component, Suspense } from 'react';
+import React, { Component } from 'react';
 import moviesAPI from '../services/api';
-import Loader from '../components/Loader';
-
-const CastList = React.lazy(() => import('../components/CastList'));
+import CastList from '../components/CastList';
 
 class Cast extends Component {
     state = {
@@ -22,11 +20,9 @@ class Cast extends Component {
         return (<>
             {cast && (
                 <ul>
-                    <Suspense fallback={<Loader />}>
-                        {cast.map(cast => (
-                            <CastList key={cast.id} cast={cast} src={imgSrc(cast.profile_path)} />
-                        ))}
-                    </Suspense>
+                    {cast.map(cast => (
+                        <CastList key={cast.id} cast={cast} src={imgSrc(cast.profile_path)} />
+                    ))}
                 </ul>
             )}
         </>

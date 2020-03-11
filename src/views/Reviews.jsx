@@ -1,8 +1,7 @@
-import React, { Component, Suspense } from 'react';
+import React, { Component } from 'react';
 import moviesAPI from '../services/api';
-import Loader from '../components/Loader';
+import ReviewsList from '../components/ReviewsList';
 
-const ReviewsList = React.lazy(() => import('../components/ReviewsList'));
 class Reviews extends Component {
     state = {
         reviews: [],
@@ -17,11 +16,9 @@ class Reviews extends Component {
         return (<>
             {reviews && (
                 <ul>
-                    <Suspense fallback={<Loader />}>
-                        {reviews.map(review => (
-                            <ReviewsList key={review.id} review={review} />
-                        ))}
-                    </Suspense>
+                    {reviews.map(review => (
+                        <ReviewsList key={review.id} review={review} />
+                    ))}
                 </ul>
             )}
             {this.state.reviews.length === 0 && (
